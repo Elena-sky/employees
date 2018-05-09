@@ -53,6 +53,43 @@ class Employees extends Model
         return $this->belongsTo('App\Employees', 'parent_id', 'id');
     }
 
+    /**
+     * Get all from table Employees
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function allList()
+    {
+        return Employees::query()
+            ->orderBy('id', 'desc')
+            ->paginate(40);
+    }
+
+    /**
+     * Search all boss by @param $name
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function selectBoss($name)
+    {
+        return self::query()
+            ->where('full_name', 'LIKE', '%' . $name . '%')->get(['full_name']);
+    }
+
+    /**
+     * Get id by Name
+     *
+     * @param $name
+     * @return mixed
+     */
+    public static function getIdByName($name)
+    {
+         $mentor = self::where('full_name', '=', $name)->first();
+        return $mentor->id;
+    }
+
+
 
 
 }
