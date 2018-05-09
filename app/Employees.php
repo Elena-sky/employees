@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
  * Class Employees
  * @package App
@@ -58,7 +59,7 @@ class Employees extends Model
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function allList()
+    public function allList()
     {
         return Employees::query()
             ->orderBy('id', 'desc')
@@ -71,7 +72,7 @@ class Employees extends Model
      * @param $name
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public static function selectBoss($name)
+    public function selectBoss($name)
     {
         return self::query()
             ->where('full_name', 'LIKE', '%' . $name . '%')->get(['full_name']);
@@ -83,11 +84,25 @@ class Employees extends Model
      * @param $name
      * @return mixed
      */
-    public static function getIdByName($name)
+    public function getIdByName($name)
     {
          $mentor = self::where('full_name', '=', $name)->first();
         return $mentor->id;
     }
+
+
+    /**
+     * Get old photo
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getOldPhoto($id)
+    {
+        $name = self::where('id', '=', $id)->get(['photo'])->first();
+        return $name->photo;
+    }
+
 
 
 

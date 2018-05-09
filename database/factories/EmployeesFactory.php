@@ -22,7 +22,7 @@ $factory->define(Employees::class, function (Faker $faker) {
         'salary' => $faker->numberBetween($min = 1000, $max = 60000),
         'position' => $faker->jobTitle,
         'parent_id' => $faker->numberBetween($min = 1, $max = 2000),
-        'photo' => $faker->numberBetween($min = 1, $max = 4),
+        'photo' => $faker->numberBetween($min = 1, $max = 4).'.jpg',
     ];
 
 
