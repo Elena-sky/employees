@@ -45,7 +45,6 @@ function load(item)
 }
 
 
-
 $(document).ready(function()
 {
     $.ajaxSetup({
@@ -53,6 +52,34 @@ $(document).ready(function()
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
+    $('#boss').autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: document.location.origin + "/employees/selectBoss",
+                data:{
+                    q: request.term
+                },
+                success: function(data){
+                    console.log(data);
+
+                    response($.map(data, function(item){
+                        return {
+                            label: item.full_name
+                        };
+                    }));
+                }
+            });
+        },
+        select: function( event, ui ) {
+            //  вывод результата на экран
+            $('#boss').val(ui.item.full_name);
+
+        },
+        minLength: 5 // начинать поиск с трех символов
+    });
+
 
     $('.hierarchy').on('click','li.hierarchy__item .hierarchy__item_toggle',function()
     {
@@ -77,5 +104,8 @@ $(document).ready(function()
             }
         }
     });
+
+
+
 
 });
