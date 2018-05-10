@@ -53,7 +53,6 @@ $(document).ready(function()
         }
     });
 
-
     // Ajax autocomplete for select of boss when create or update new employee
     $('#boss').autocomplete({
         source: function(request, response){
@@ -102,6 +101,31 @@ $(document).ready(function()
         }
     });
 
+    // Ajax sort employee
+    $('.sortTable').click(function () {
+        var orderBy = $(this).data('order-by');
+        var sortOrder = $(this).data('sort-order');
+
+        console.log('/employees/sort/'+ orderBy + '/' + sortOrder);
+        $.ajax({
+            type: "post",
+            url: document.location.origin + '/employees/sort',
+            data: {orderBy: orderBy, sortOrder: sortOrder},
+            success: function (response) {
+                console.log(response.data);
+                $("#employeesList").html('');
+                $.each(response.data, function() {
+                    var elementClassic = '<tr id="' + this.id + '"><td>' + this.photo + '</td><td>' + this.full_name +
+                        '</td><td>' + this.position + '</td><td>' + this.parent_id + '</td><td>' + this.start_date +
+                        '</td><td>' + this.salary + '</td></tr>';
+                    $("#employeesList").append(elementClassic);
+                });
+            },
+            error: function () {
+                console.log("ошибка");
+            }
+        });
+    });
 
 
     $('.hierarchy').on('click','li.hierarchy__item .hierarchy__item_toggle',function()
@@ -127,6 +151,7 @@ $(document).ready(function()
             }
         }
     });
+
 
 
 

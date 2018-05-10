@@ -63,7 +63,7 @@ class Employees extends Model
     {
         return Employees::query()
             ->orderBy('id', 'desc')
-            ->paginate(40);
+            ->paginate(20);
     }
 
     /**
@@ -101,6 +101,21 @@ class Employees extends Model
     {
         $name = self::where('id', '=', $id)->get(['photo'])->first();
         return $name->photo;
+    }
+
+
+    /**
+     * Sorted of data with table of employees
+     *
+     * @param $orderBy
+     * @param $sortOrder
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function sort($orderBy, $sortOrder)
+    {
+        return Employees::query()
+            ->orderBy($orderBy, $sortOrder)
+            ->paginate(20);
     }
 
 

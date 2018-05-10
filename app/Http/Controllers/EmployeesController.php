@@ -62,7 +62,7 @@ class EmployeesController extends Controller
     {
         $parent_id = $this->employyes->getIdByName($request->boss);
 
-        $fileName = ($request->hasFile('photo'))? self::uploader($request) : null;
+        $fileName = ($request->hasFile('photo'))? self::uploader($request) : 0;
 
         $data = [
             'full_name' => $request->full_name,
@@ -165,9 +165,20 @@ class EmployeesController extends Controller
     public function delete(Request $request)
     {
         $employee = Employees::find($request->id);
-        $employee->delete;
+        $employee->delete();
+    }
 
-        return;
+    /**
+     * Sorted of data with table of employees
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function sortTable(Request $request)
+    {
+        $sortData = $this->employyes->sort($request->orderBy,  $request->sortOrder);
+
+        return $sortData;
     }
 
 
