@@ -54,6 +54,7 @@ $(document).ready(function()
     });
 
 
+    // Ajax autocomplete for select of boss when create or update new employee
     $('#boss').autocomplete({
         source: function(request, response){
             $.ajax({
@@ -80,6 +81,28 @@ $(document).ready(function()
         minLength: 5 // начинать поиск с трех символов
     });
 
+    // Ajax delete employee
+    $('.delete').click(function () {
+        var id = $(this).data('employee-id');
+
+        if (confirm('Are you sure you want to delete?')) {
+            $.ajax({
+                type: "post",
+                url: document.location.origin + '/employees/delete',
+                data: {id: id, _method: 'delete'},
+                success: function (del) {
+                    console.log(id + ' удалилось');
+                    // window.location.reload(true);
+                    $('#'+id).remove();
+                },
+                error: function () {
+                    console.log("ошибка");
+                }
+            });
+        }
+    });
+
+
 
     $('.hierarchy').on('click','li.hierarchy__item .hierarchy__item_toggle',function()
     {
@@ -104,8 +127,6 @@ $(document).ready(function()
             }
         }
     });
-
-
 
 
 });

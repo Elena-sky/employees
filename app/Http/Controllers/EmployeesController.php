@@ -157,6 +157,19 @@ class EmployeesController extends Controller
 
     }
 
+    /**
+     * Ajax delete employee
+     *
+     * @param Request $request
+     */
+    public function delete(Request $request)
+    {
+        $employee = Employees::find($request->id);
+        $employee->delete;
+
+        return;
+    }
+
 
 
 }
