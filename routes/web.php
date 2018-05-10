@@ -35,10 +35,11 @@ Route::group([ 'middleware' => 'auth'], function(){
     Route::put('/employees/{id}/updated', 'EmployeesController@updated')->name('updatedEmployee');
 
     // Delete employee
-    Route::delete('/employees/delete', 'EmployeesController@delete'); // Ajax delete employee
+    Route::delete('/employees/delete', 'EmployeesController@delete')->name('delete'); // Ajax delete employee
 
-    // Ajax sort employee
-    Route::post('/employees/sort', 'EmployeesController@sortTable')->name('sort');
+    // Ajax
+    Route::post('/employees/sort', 'EmployeesController@sortTable')->name('sort'); // sort employee
+    Route::post('/employees/search', 'EmployeesController@search')->name('sort'); // search employee
 
 
 

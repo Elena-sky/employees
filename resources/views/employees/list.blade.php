@@ -9,6 +9,17 @@
             <div class="col-md-12 section-title">
                 <h2>List of workers</h2>
 
+                <form id="employeesSearch" class="col-md-8 col-md-offset-2">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="querySearch">Search for employees by any field</label>
+                        <input type="text" class="form-control" id="querySearch" placeholder="Enter a keyword or phrase" name="query">
+                    </div>
+                        <button type="submit" class="btn btn-default">
+                            Search
+                        </button>
+                </form>
+
                 <a href="{{route('createEmployee')}}">
                     <button type="button" class="btn btn-default">
                         Create new employee

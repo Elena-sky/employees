@@ -181,6 +181,17 @@ class EmployeesController extends Controller
         return $sortData;
     }
 
+    /**
+     * Search for employees by any field
+     *
+     * @param Request $request
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function search(Request $request)
+    {
+        $res = $this->employyes->search($request->input('query'));
+        return $res;
+    }
 
 
 }

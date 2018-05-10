@@ -118,8 +118,21 @@ class Employees extends Model
             ->paginate(20);
     }
 
+    /**
+     * Search for employees by any field
+     *
+     * @param $query
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function search($query)
+    {
+        $res = self::query()->where('full_name', 'like', '%'.$query.'%')
+            ->orWhere('start_date', 'like', '%'.$query.'%')
+            ->orWhere('salary','like', '%'.$query.'%')
+            ->orWhere('position', 'like', '%'.$query.'%')
+            ->get();
 
-
-
+        return $res;
+    }
 
 }

@@ -44,6 +44,60 @@ function load(item)
     });
 }
 
+// Html for table of employees
+function dataEmployee(data)
+{
+    var photo = data.photo !== null ? '/img/team/' + data.photo : '/img/no-picture.jpg';
+
+
+    var employee = $('<tr/>', {
+        id : data.id
+    })
+        .append( $('<td/>')
+            .append( $('<img/>', {
+                src     :   photo,
+                width   :   50,
+                height   :   50,
+                class : 'img-circle team-img'
+            }))
+        )
+        .append( $('<td/>', {
+            text    :   data.full_name
+        }))
+        .append( $('<td/>', {
+            text    :   data.position
+        }))
+        .append( $('<td/>', {
+            text    :   data.boss
+        }))
+        .append( $('<td/>', {
+            text    :   data.start_date
+        }))
+        .append( $('<td/>', {
+            text    :   data.salary
+        }));
+        // .append( $('<td/>')
+        //     .append( $('<a/>', {
+        //         href    : '{{route("updateEmployee", [' + data.id + '])}}'
+        //     }).append( $('</button>', {
+        //         type    :   'button',
+        //         class : 'btn btn-default',
+        //         text : 'Update'
+        //     })))
+        // )
+        // .append( $('<td/>')
+        //     .append( $('<a/>', {
+        //         href    : '{{route("delete", [' + data.id + '])}}'
+        //     }).append( $('</button>', {
+        //         type    :   'button',
+        //         class : 'btn btn-default delete',
+        //         text : 'Delete'
+        //     })))
+        // );
+
+    return employee;
+}
+
 
 $(document).ready(function()
 {
@@ -112,17 +166,33 @@ $(document).ready(function()
             url: document.location.origin + '/employees/sort',
             data: {orderBy: orderBy, sortOrder: sortOrder},
             success: function (response) {
-                console.log(response.data);
+
                 $("#employeesList").html('');
                 $.each(response.data, function() {
-                    var elementClassic = '<tr id="' + this.id + '"><td>' + this.photo + '</td><td>' + this.full_name +
-                        '</td><td>' + this.position + '</td><td>' + this.parent_id + '</td><td>' + this.start_date +
-                        '</td><td>' + this.salary + '</td></tr>';
-                    $("#employeesList").append(elementClassic);
+                    $("#employeesList").append( dataEmployee( this ) );
                 });
             },
             error: function () {
                 console.log("ошибка");
+            }
+        });
+    });
+
+    // Ajax search
+    $("#employeesSearch").submit(function(e) {
+        e.preventDefault();
+        var query = $("input[name='query']").val();
+
+        $.ajax({
+            url:  document.location.origin + "/employees/search",
+            type: 'POST',
+            data: {query:query},
+            success: function(data) {
+
+                $("#employeesList").html('');
+                $.each(data, function() {
+                    $("#employeesList").append( dataEmployee( this ) );
+                });
             }
         });
     });
@@ -151,8 +221,6 @@ $(document).ready(function()
             }
         }
     });
-
-
 
 
 });
