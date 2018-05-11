@@ -198,6 +198,7 @@ $(document).ready(function()
     });
 
 
+    // Tree of employees
     $('.hierarchy').on('click','li.hierarchy__item .hierarchy__item_toggle',function()
     {
 

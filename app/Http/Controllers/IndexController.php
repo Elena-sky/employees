@@ -24,4 +24,16 @@ class IndexController extends Controller
     }
 
 
+    /**
+     * Get subordinates
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function getNextLevel(Request $request)
+    {
+        return Employees::find($request->id)->workers()->get();
+
+    }
+
 }
