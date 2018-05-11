@@ -91,11 +91,11 @@
     </div>
 </div>
 <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/SmoothScroll.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jquery.isotope.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jqBootstrapValidation.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/script.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/treeOfWorkers.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/treeOfWorkers.js')}}"></script>
 
 

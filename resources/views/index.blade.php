@@ -19,6 +19,7 @@
         </div>
     </header>
 
+
 <!-- Services Section -->
 <div id="services" class="text-center">
     <div class="container">
@@ -42,7 +43,6 @@
                             @endforeach
                         </ul>
                     @endif
-
 
                 </li>
             </ul>
