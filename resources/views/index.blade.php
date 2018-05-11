@@ -12,7 +12,6 @@
                         <div class="intro-text">
                             <h1>Welcome to <span class="brand">Employees</span></h1>
                             <p>This is online catalog of employees</p>
-                            <a href="#services" class="btn btn-default btn-lg page-scroll">Learn More</a> </div>
                     </div>
                 </div>
             </div>
