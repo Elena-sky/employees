@@ -21,3 +21,33 @@
 - Bootstrap;
 - MySQL;
 
+## Instalation
+
+- Create database
+
+- Create and config .env file
+
+- Install packages:
+```bash
+$ composer install
+
+```
+- Generate unique key:
+```bash
+$ php artisan key:generate
+
+```
+
+- Create tables:
+
+```bash
+$ php artisan migrate
+
+```
+
+- Fill the base
+
+```bash
+$ php artisan db:seed --class=EmployeesTableSeeder
+
+```
